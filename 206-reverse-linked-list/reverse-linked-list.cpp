@@ -11,25 +11,15 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        if (head == nullptr) return nullptr; // Handle empty list edge case
-
-        stack<int> st;
         ListNode* temp = head;
+        ListNode* prev = NULL;
 
-        // Step 1: Push all values onto the stack
-        while (temp != nullptr) {
-            st.push(temp->val);
-            temp = temp->next;
+        while(temp !=NULL){
+            ListNode* front = temp->next;
+            temp->next=prev;
+            prev = temp;
+            temp = front ;
         }
-
-        // Step 2: Pop values back into the nodes to reverse them
-        temp = head;
-        while (temp != nullptr) {
-            temp->val = st.top();
-            st.pop();
-            temp = temp->next;
-        }
-
-        return head; // Don't forget to return the modified list
+        return prev;
     }
 };
